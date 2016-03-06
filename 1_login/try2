@@ -1,27 +1,21 @@
 HTTP/1.1 302 Found
-Date: Sun, 06 Mar 2016 19:11:35 GMT
+Date: Sun, 06 Mar 2016 19:44:07 GMT
 Server: Apache/2.4.10 (Debian)
-Set-Cookie: PHPSESSID=huluivip4lso672fnn6e064hk6; path=/
 Expires: Thu, 19 Nov 1981 08:52:00 GMT
 Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
 Pragma: no-cache
-Set-Cookie: PHPSESSID=huluivip4lso672fnn6e064hk6; path=/; httponly
-Set-Cookie: security=impossible; httponly
 Location: login.php
 Content-Length: 0
 Content-Type: text/html; charset=UTF-8
 
 HTTP/1.1 200 OK
-Date: Sun, 06 Mar 2016 19:11:35 GMT
+Date: Sun, 06 Mar 2016 19:44:07 GMT
 Server: Apache/2.4.10 (Debian)
-Set-Cookie: PHPSESSID=8ccsi9o98datk8cs1tpe09ara6; path=/
 Expires: Tue, 23 Jun 2009 12:00:00 GMT
 Cache-Control: no-cache, must-revalidate
 Pragma: no-cache
-Set-Cookie: PHPSESSID=8ccsi9o98datk8cs1tpe09ara6; path=/; httponly
-Set-Cookie: security=impossible; httponly
 Vary: Accept-Encoding
-Content-Length: 1567
+Content-Length: 1617
 Content-Type: text/html;charset=utf-8
 
 
@@ -70,13 +64,13 @@ Content-Type: text/html;charset=utf-8
 
 	</fieldset>
 
-	<input type='hidden' name='user_token' value='911db6be00e015af6b8848c68ec9b79d' />
+	<input type='hidden' name='user_token' value='21455f8237ae0820c0f1fb8cff95acf5' />
 
 	</form>
 
 	<br />
 
-	
+	<div class="message">CSRF token is incorrect</div>
 
 	<br />
 	<br />
